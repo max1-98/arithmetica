@@ -33,7 +33,7 @@ Past Lessons
 		    <td>{{ lesson.accuracy }}</td>
 		    <td>{{ lesson.speed }}</td>
 		    <td>{{ lesson.understanding }}</td>
-		    <td>{% if lesson.homework_complete %}Complete{% else %}Incomplete{% endif %}</td>
+		    <td>{% if lesson.homework_complete %}<p class="text-success">Complete</p>{% else %}<p class="text-danger">Incomplete</p>{% endif %}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
