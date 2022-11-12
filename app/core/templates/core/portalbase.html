@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Lora&display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Cairo', sans-serif;
+		}
+
+		.app {
+			display: flex;
+			min-height: 100vh;
+		}
+
+		.sidenav {
+			flex: 1 1 0;
+			max-width: 300px;
+			padding: 2rem 1rem;
+			background-color: #212529;
+		}
+
+		.sidenav h3{
+			font-family: 'Lora', serif;
+			font-weight: 800;
+			color: whitesmoke;
+			font-size: 1rem;
+			margin-bottom: 0.5em;
+			margin-left: 0.3rem;
+		}
+
+		.sidenav h3:hover{
+			cursor: pointer;
+			transition: all 0.3s ease 0s;
+			color: #e8491d;
+		}
+
+		.sidenav .menu{
+			margin:  0 -1rem;
+		}
+
+		.sidenav .menu .menu-item{
+			display: block;
+			padding: 1em;
+			color: #FFF;
+			text-decoration: none;
+			transition: 0.2s linear;
+		}
+
+		.sidenav .menu .menu-item:hover, .sidenav .menu .menu-item.is-active {
+			color: #e8491d;
+			border-right: 5px solid #e8491d;
+		}
+
+		.content {
+			flex:  1 1 0;
+			padding:  2rem;
+		}
+
+		.menu-toggle {
+			display: none;
+			position: fixed;
+			top:  2rem;
+			right: 2rem;
+			width: 60px;
+			height: 60px;
+			border-radius: 99px;
+			cursor: pointer;
+			background-color: #212529;
+		}
+
+		.hamburger {
+			position: relative;
+			top:  calc(50% - 2px);
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 32px;
+		}
+
+		.hamburger span, .hamburger span::before, .hamburger span::after{
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 4px;
+			border-radius: 99px;
+			background-color: #FFF;
+			transition-duration: 0.25s;
+		}
+
+		.hamburger span::before{
+			content: '';
+			top: -8px;	
+		}
+
+		.hamburger span::after{
+			content: '';
+			top: 8px;
+		}
+
+		.menu-toggle.is-active .hamburger span{
+			transform: rotate(45deg);
+		}
+
+		.menu-toggle.is-active .hamburger span::before{
+			top: 0;
+			transform: rotate(0deg);
+
+		}
+
+		.menu-toggle.is-active .hamburger span::after{
+			top: 0;
+			transform: rotate(90deg);
+		}
+
+		.logo a{
+			text-decoration: none;
+		}
+
+
+		@media(max-width:  1024px){
+			.sidenav {
+				max-width: 200px;
+			}
+		}
+
+		@media(max-width: 768px){
+			.menu-toggle {
+				display: block;
+			}
+
+			.content {
+				padding-top: 8rem;
+			}
+
+			.sidenav{
+				position: fixed;
+				top: 0;
+				left:  -300px;
+				height: 100vh;
+				width: 100%;
+				max-width: 300px;
+				transition: 0.2s linear;
+			}
+
+			.sidenav.is-active{
+				left: 0;
+			}
+		}
+
+
+	</style>
+
+</head>
+<body>
+
+{% if user.is_authenticated %}
+<div class="app">
+
+	<div class="menu-toggle">
+		<div class="hamburger">
+			<span></span>
+		</div>
+	</div>
+
+	<aside class="sidenav">
+		<nav class="menu">
+				<a href="\" class="logo" style="text-decoration: none"><h3> Arithmetica Tuition </h3></a>
+				<a href="\dashboard" class="menu-item {% block dashboard %}{% endblock %}"> Dashboard </a>
+				{% if request.user.is_tutor or request.user.is_staff %}
+				<a href="\students" class="menu-item {% block students %}{% endblock %}"> Students </a>
+				{% else %}
+				<a href="\progress" class="menu-item {% block progress %}{% endblock %}"> Progress </a>
+				<a href="\lessons" class="menu-item {% block lessons %}{% endblock %}"> Past Lessons </a>
+				{% endif %}
+				{% if request.user.is_staff %}
+				<a href="\assign" class="menu-item {% block assign %}{% endblock %}"> Assign Students </a>
+				{% endif %}
+				<a href="\logout" class="menu-item"> Log Out </a>
+    	</nav>
+    </aside>
+
+    <main class="content">
+    	{% block content %}{% endblock %}
+    </main>
+</div>
+
+<script type="text/javascript"> 
+	const menu_toggle = document.querySelector('.menu-toggle');
+	const sidenav = document.querySelector('.sidenav');
+
+	menu_toggle.addEventListener('click', () => {
+		menu_toggle.classList.toggle('is-active');
+		sidenav.classList.toggle('is-active');
+	})
+
+
+
+</script>
+
+
+{% else %}
+
+	<style type="text/css">
+		.topbar a{	
+			font-family: 'Lora', serif;
+			text-align: center;
+			margin: 0;
+			font-weight: 800;
+			color:  whitesmoke;
+			text-decoration: none;
+		}
+
+		.topbar {
+			text-align: center;
+			padding: 30px 10%;
+			background-color: #27282e;
+			color: whitesmoke;
+		}
+
+		.login {
+			margin-top: 3vh;
+			text-align: center;
+		}
+
+		.login p{
+			color: black;
+			font-size: 2rem;
+		}
+
+		.login p:hover{
+			color: black;
+			font-size: 2rem;
+		}
+
+		.topbar a:hover {
+			text-decoration: none;
+			cursor: pointer;
+			transition: all 0.3s ease 0s;
+			color: #e8491d;
+		}
+
+	</style>
+
+<div class="topbar">
+	<h1>
+		<a href="\" class="name">Arithmetica <br> Tuition</a>
+	</h1>
+</div>
+<div class="login">
+	<p> You are logged out please click <a href="\login\"> here </a> to login </p>
+</div>
+
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+</body>
+</html>

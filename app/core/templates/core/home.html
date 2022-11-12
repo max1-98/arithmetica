@@ -1,0 +1,74 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+
+
+{% block home %}
+active 
+{% endblock %}
+
+{% block content %}
+	<div class="mt-1 p-5 text-white rounded" style="background: #114084;text-align: center">
+		<div class="container">
+		  	<h1>We offer a free trial lesson with no strings attached!</h1>
+		  	<p>Choosing an organisation for tuition can be expensive and difficult as choosing the right one is so important for a student's future. At Arithmetica Tuition we try to make this easier by offering <b>below market</b> hourly price and a <b>free trial lesson</b> to see if our service would be helpful.</p>
+		</div>
+	</div>
+
+	<div style="background:#F1F1F1">
+		<br>
+		<br>
+		<div class="container" style="text-align: center">
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<h1 style="color: black">What do we do?</h1>
+					<br>
+					<p style="color:#3C3C3C;">We specialise in taking students at <b>any grade in A-level mathematics</b> to the grade they need to ensure their best future. As we focus only A-level Mathematics it has lead us to know the <b>course inside and out</b>, meaning we know exactly when and what to focus to ensure success in the final exams.</p>
+				</div>
+				<div class="col-12 col-lg-6">
+					<h1 style="color: black">What sets us apart?</h1>
+					<br>
+					<p style="color:#3C3C3C;">Through <b>easy to digest tables and graphs</b> we allow parents to easily keep track of a student's progress and it gives us extra information to help us give the best advice on a study plan and schedule for A-level mathematics. At Arithmetica Tuition we pride ourselves on being able to explain topics in multiple ways and inspire students. </p>
+					
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+
+	<div style="background: #1C1C1C;color:white">
+		<br>
+		<br>
+		<div class="container" style="text-align: center;">
+			<h1>How does it all work?</h1>
+			<br>
+			<p>We coordinate all lesson reports/statistics on the Student Portal. The lessons will take place online using Zoom and Miro Whiteboard.</p>
+		</div>
+		<br>
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<br>
+				<div class="col-12 col-lg-6">
+					<br>
+					<img src="{% static 'media/image1.png' %}" class="img-fluid" alt="Responsive image">
+				</div>
+
+				<div class="col-12 col-lg-6 pl-2" style="text-align:left">
+					<br>
+					<h5>The Student Portal means everything tuition is in one place.</h5>
+					<br>
+					<p>Our specially built Student Portal records progress statistics from the lessons, what topics were covered and whether homework set has been completed. This means everything tuition is in one place and being able to check short/long term progress has never been so easy. To sign up it is completely free and can be done by clicking <a href="/register">here</a>
+					</p> 
+					<br>
+					<br>
+					<p> After you sign-up a tutor will contact you via SMS. They will arrange a phone call with you to get an idea of the areas of weakness, discuss briefly what will happen in the trial lesson and then organise a time for this trial lesson. After this takes place the tutor will send a report via email detailing how they feel the student is currently doing and a description of the plan going forward. From there you can decide whether to continue with us or look for another organisation. <b>If you have any further questions then get in touch with maxsmith@arithmeticatuition.com </b>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+{% endblock %}
+

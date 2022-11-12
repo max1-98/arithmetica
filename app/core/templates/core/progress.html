@@ -1,0 +1,76 @@
+{% extends "core/portalbase.html" %}
+
+{% block title %} Progress {% endblock %}
+
+{% block content %} 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>	
+
+
+
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script type="text/javascript">
+
+	var myChart = new Chart("myChart",{
+		type:"line",
+		data: {
+			labels: {{dates|safe}},
+			datasets:[{
+      			borderColor: "rgba(0,0,0,1)",
+      			data: {{scores|safe}}
+			}]
+		},
+		options:{
+			responsive: true,
+            legend: {
+            	display:false,
+            	position: 'top',
+             },
+             scales: {
+             	xAxes: [{
+             		display: true,
+             		scaleLabel: {
+             			display: true,
+             			labelString: "Date"
+             		}
+             	}],
+
+             	yAxes: [{
+             		display: true,
+             		ticks:{
+             			beginAtZero: true,
+             			steps: 10,
+             			stepValue: 1,
+             			max: 10
+             		}
+             	}]
+             },
+             title:{
+             	display: true,
+             	text: 'Average of Accuracy, Speed and Understanding score for each lesson.'
+             }
+        }
+	});
+
+</script>
+
+<br>
+Each lesson we record the accuracy, speed and understanding score from each lesson. We then average this to produce the following line graph. If no lessons have been completed then this will be empty but will fill up as lessons get completed. It will allow you to see long term progress in an <b>easy to digest</b> format.
+<br>
+<br>
+We aim to get all students to an average of 8 by their final exams, sometimes this won't be possible for certain reasons such as short time frames, nevertheless whether we have 1 week or 1 year we will focus on ensuring we can help our students achieve the highest grades possible. 
+<br>
+<br>
+If the scores remain low and test scores are low then your tutor will contact and explain the situation and advise on how to move forward. We never <b> give up</b> on a student, we believe every student has the ability to complete A-level mathematics.
+<br>
+<br>
+Low scores may correspond with frequently incomplete homework. Please check the Past Lessons tab after any lesson to check for missed homework and encourage the completion of this. 
+
+
+
+
+
+{% endblock %}
+
+{% block progress %} is-active {% endblock %}

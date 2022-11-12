@@ -1,0 +1,87 @@
+{% extends "core/portalbase.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Student Dashboard {% endblock %}
+
+
+
+{% block content %} 
+
+
+<!-- Need to also add an if so only tutors of that student can see this, something like checking the user email is the same as the tutor email for the student or if Staff-->
+
+
+{% if request.user.is_tutor or request.user.is_staff %}
+
+	<h1> Add Lesson </h1>
+		<form method="POST" class="form-group">
+		  {% csrf_token %}
+		  {{form|crispy}}
+		  <button type="submit" class="btn btn-dark">Add Lesson</button>
+		</form>
+		<p><b>Please check this information is correct.</b> </p>
+
+		<!-- I only want this to appear if they aren't a tutor, now as this is a staff's view not a tutor view it needs to find the user first and we draw on that-->
+		<h1> Past Lessons </h1>
+
+		<form method="post" action="#">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-dark" name="save" value="save"> Save </button>
+		<table class="table table-striped">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Date</th>
+		      <th scope="col">Main Topic</th>
+		      <th scope="col">Additional Topic 1</th>
+		      <th scope="col">Additional Topic 2</th>
+		      <th scope="col">Accuracy</th>
+		      <th scope="col">Speed</th>
+		      <th scope="col">Understanding</th>
+		      <th scope="col">Homework</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for lesson in lessons.lesson_set.all %}
+		    <tr>
+		      <td>{{ lesson.date }}</td>
+		      <td>{{ lesson.topic1 }}</td>
+		      <td>{{ lesson.topic2 }}</td>
+		      <td>{{ lesson.topic3 }}</td>
+		      <td>{{ lesson.accuracy }}</td>
+		      <td>{{ lesson.speed }}</td>
+		      <td>{{ lesson.understanding }}</td>
+		      <td>
+		      {% if lesson.homework_complete %}
+		      	<input type="checkbox", value="clicked", name="c{{lesson.id}}" checked>
+		      {% else %}
+		      	<input type="checkbox", value="clicked", name="c{{lesson.id}}">
+		      {% endif %}
+		      </td>   
+		    </tr>
+		    {% endfor %}
+		  </tbody>
+		</table>
+		</form>
+
+	<!-- need to add a homework complete button in the table + save button -->
+
+
+
+<!-- Make Tutor Button -->
+
+{% else %}
+
+
+	<h1> This is a Arithmetica Staff Only Page click <a href="\dashboard\"> here </a> to return to the student pages.</h1>
+	<p> Is this a mistake and you are a Arithmetica Tuition staff member? Contact your trainer. </p>
+
+
+{% endif %}
+
+{% endblock %}
+
+
+
+{% block student %}
+is-active
+{% endblock %}

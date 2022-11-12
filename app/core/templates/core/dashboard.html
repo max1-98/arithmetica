@@ -1,0 +1,84 @@
+{% extends "core/portalbase.html" %}
+
+{% block title %} Student Dashboard {% endblock %}
+
+
+
+{% block content %} 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% if not request.user.is_tutor %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Full Name</th>
+      <th scope="col">Initial Grade</th>
+      <th scope="col">Exam Board</th>
+      <th scope="col">Tutor's Email</th>
+      <th scope="col"> Total lessons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+      <td>{{ request.user.intialgrade }}</td>
+      <td>{{ request.user.examboard }}</td>
+      <td>{{request.user.tutor_email}}</td>
+      <td>{{request.user.numberoflessons}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4> Trial Lesson Report </h4>
+<p>Once the trial lesson has been completed and the tutor will send it to {{request.user.email}}.</p>
+
+<h4> What does all the information mean and as a parent what should I be looking for? </h4>
+<p> We believe success in A Level maths comes down to 3 key attributes which we measure after each lesson: Accuracy, Speed and Understanding. We rank these from 1 to 10. 10 being perfect and 1 being the lowest. An average of 1 would be common of a U grade student. We of course aim for all students to be at a 10 level by the time exams take place but we understand this is not possible because of our high standards for a 10, an average of 7+ signifies a student is in a good position and beginning at a 2/3 average is fairly normal. 
+<br>
+<br>
+The most important information we believe parents should keep track on is the homework complete feature in the lessons tab. <b>Completion of homework</b> is so important, we understand lessons are expensive but we highly value the importance of solo studying. So usually in lessons we will cover content, go through questions and students will complete questions in these lessons with assistance from a tutor when needed, this allows students to get a basic understanding. Homework will then be set and this gives students an opportunity to solo study, this type of study is very important. Why is it important? Well for one when you get stuck in solo study, the focus then becomes looking through notes or past similar questions and looking at how it was done, this takes more effort than asking a tutor and that extra effort encourages the brain to remember this piece of information for the future. In our view being able to understand vs being able to remember a technique are two different highly important attributes. 
+<br>
+<br>
+Complete homework should be sent to a tutor via WhatsApp or Zoom to be checked. It will then be marked on the website as complete by the tutor. Our tutors are trained to give tips for encouraging completing homework and will give nudges and other behavioural tactics to encourage homework.
+</p>
+
+{% else %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Hour's Worked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+      <td>{{request.user.email}}</td>
+      <td>{{request.user.phonenumber}}</td>
+      <td>{{request.user.numberoflessons}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h4> Got any questions?</h4>
+<p> Get in contact with max@arithmeticatuition.com </p>
+<br>
+<br>
+<h4> Found a bug? </h4>
+<p> Report it to max@arithmeticatuition.com </p>
+<br>
+<br>
+<p><b> Your students success is the number one priority, go the extra mile, don't necessarily cut off lessons because the time has ended, if the parents are happy with how you tutor it helps us get more students for you and we offer bonuses for tutoring excellence. Feel free to discuss any techniques or "hacks" you have found to motivating your students or explaining a concept in the WhatsApp group. </b></p> 
+
+{% endif %}
+
+
+{% endblock %}
+
+
+
+{% block dashboard %}is-active{% endblock %}

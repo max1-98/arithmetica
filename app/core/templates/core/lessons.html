@@ -1,0 +1,47 @@
+{% extends "core/portalbase.html" %}
+
+{% block title %} 
+
+Past Lessons 
+
+{% endblock %}
+
+
+
+{% block content %} 
+
+<table class="table table-striped">
+	<thead class="thead-dark">
+		<tr>
+		    <th scope="col">Date</th>
+		    <th scope="col">Main Topic</th>
+		    <th scope="col">Additional Topic 1</th>
+		    <th scope="col">Additional Topic 2</th>
+		    <th scope="col">Accuracy</th>
+		    <th scope="col">Speed</th>
+		    <th scope="col">Understanding</th>
+		    <th scope="col">Homework</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for lesson in lessons.lesson_set.all %}
+		<tr>
+		    <td>{{ lesson.date }}</td>
+		    <td>{{ lesson.topic1 }}</td>
+		    <td>{{ lesson.topic2 }}</td>
+		    <td>{{ lesson.topic3 }}</td>
+		    <td>{{ lesson.accuracy }}</td>
+		    <td>{{ lesson.speed }}</td>
+		    <td>{{ lesson.understanding }}</td>
+		    <td>{% if lesson.homework_complete %}Complete{% else %}Incomplete{% endif %}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}
+
+
+{% block lessons %} 
+is-active
+{% endblock %}

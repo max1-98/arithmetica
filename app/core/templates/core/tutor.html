@@ -1,0 +1,39 @@
+{% extends "core/portalbase.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Student Dashboard {% endblock %}
+
+
+
+{% block content %} 
+
+
+<!-- Need to also add an if so only tutors of that student can see this, something like checking the user email is the same as the tutor email for the student or if Staff-->
+
+
+{% if request.user.is_tutor or request.user.is_staff %}
+
+<h1> Add student </h1>
+<form method="POST" class="form-group">
+	{% csrf_token %}
+	{{form2|crispy}}
+	<button class="btn btn-dark" type="submit">Student</button>
+</form>
+
+
+{% else %}
+
+
+<h1> This is a Arithmetica Staff Only Page click <a href="\dashboard\"> here </a> to return to the student pages.</h1>
+<p> Is this a mistake and you are a Arithmetica Tuition staff member? Contact your trainer. </p>
+
+
+{% endif %}
+
+{% endblock %}
+
+
+
+{% block student %}
+is-active
+{% endblock %}

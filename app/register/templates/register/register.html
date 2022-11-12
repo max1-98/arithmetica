@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load crispy_forms_tags %}
+<html>
+<head>
+	{% load static %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Lora&display=swap');
+
+		h1 {	
+			font-family: 'Lora', serif;
+			text-align: center;
+			margin: 0;
+		}
+
+		.topbar {
+			text-align: center;
+			padding: 30px 10%;
+			background-color: #27282e;
+			color: whitesmoke;
+		}
+
+		.login {
+			margin-top: 3vh;
+			text-align: center;
+		}
+
+		.topbar a {
+			font-weight: 800;
+			color:  whitesmoke;
+			text-decoration: none;
+		}
+
+		.topbar a:hover {
+			text-decoration: none;
+			cursor: pointer;
+			transition: all 0.3s ease 0s;
+			color: #e8491d;
+		}
+
+		ul, li {
+			list-style: none;
+		}
+
+
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Register</title>
+</head>
+<body>
+<div class="topbar">
+	<h1>
+		<a href="\">Arithmetica <br> Tuition</a>
+	</h1>
+</div>
+
+<div class="login">
+	<form method="POST" class="form-group">
+	{% csrf_token %}
+	{{form|crispy}}
+	<br>
+	<button type="submit" class="btn btn-dark">Create</button>
+</form>
+<p> <b>If this page does not redirect you to the login page then please check the details filled in.</b></p>
+</div>
+
+
+
+</body>
+</html>

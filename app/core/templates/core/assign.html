@@ -1,0 +1,45 @@
+{% extends "core/portalbase.html" %}
+
+{% block title %} 
+
+Past Lessons 
+
+{% endblock %}
+
+
+
+{% block content %} 
+<form method="post", action="#">
+  {% csrf_token %}
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Student Name</th>
+        <th scope="col">Parent Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Tutor</th>	
+        <th scope="col">User Page</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+        <td>{{ user.parent_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phonenumber }}</td>
+        <td>{% if user.is_tutor %} <input type="checkbox", value="clicked", name="c{{user.id}}" checked> {% else %} <input type="checkbox", value="clicked", name="c{{user.id}}"> {% endif %}</td>
+        <td><a href="/{{user.id}}">Here</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-dark" name="save" value="save"> Save </button>
+</form>
+{% endblock %}
+
+
+{% block assign %} 
+is-active
+{% endblock %}
